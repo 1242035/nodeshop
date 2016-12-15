@@ -1,4 +1,4 @@
-extends ../layout
+extends ../layout.pug
 block content
     table.table.table-hover
         thead
@@ -17,5 +17,5 @@ block content
               td #{product.featured}
               td #{product.pricing.retail}
     .col-sm-1.col-sm-offset-11
-        a.btn.btn-primary.btn-block(href="/products/new") New 
+        a.btn.btn-primary.btn-block(href="/products/new") New
             span.glyphicon.glyphicon-plus

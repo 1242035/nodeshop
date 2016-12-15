@@ -1,4 +1,4 @@
-extends ../layout
+extends ../layout.pug
 block content
     table.table.table-hover
         thead
@@ -13,5 +13,5 @@ block content
               td #{category.seo}
               td #{category.topnav}
     .col-sm-1.col-sm-offset-11
-        a.btn.btn-primary.btn-block(href="/categories/new") New 
+        a.btn.btn-primary.btn-block(href="/categories/new") New
             span.glyphicon.glyphicon-plus

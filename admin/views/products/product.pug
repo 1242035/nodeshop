@@ -1,4 +1,4 @@
-extend ../layout
+extend ../layout.pug
 block content
     form(action="/products/#{product._id}", method="post", role="form", name="form").form-horizontal#form
         .panel.panel-default
@@ -36,11 +36,11 @@ block content
                         input.form-control(type="text", name="cost", placeholder="", value=product.pricing.cost)
         .col-sm-1
             .form-group
-                a.btn.btn-danger.btn-block#delete(product="#{product._id}") Delete 
+                a.btn.btn-danger.btn-block#delete(product="#{product._id}") Delete
                     span.glyphicon.glyphicon-remove
         .col-sm-1.col-sm-offset-10
             .form-group
-                button(type="submit").btn.btn-primary.btn-block Save 
+                button(type="submit").btn.btn-primary.btn-block Save
                     span.glyphicon.glyphicon-save
 block scripts
     script(src="/js/plugins/jquery.validate.min.js", type="text/javascript")

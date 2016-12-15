@@ -1,4 +1,4 @@
-doctype 5
+doctype html
 html(lang="en")
   head
     title #{store} | #{title}
@@ -20,11 +20,11 @@ html(lang="en")
                 li
                   a(data-toggle="modal", data-target="#modal", href="/modals/register") Register
                 li
-                  a(data-toggle="modal", data-target="#modal", href="/modals/login") Login 
+                  a(data-toggle="modal", data-target="#modal", href="/modals/login") Login
               else
                 li
                   a(href="/account/home") Account
-                li       
+                li
                   a(href="/account/logout") Logout
             #cart
               include ../cart/cart

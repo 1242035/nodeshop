@@ -1,12 +1,20 @@
 // Require express
-var express = require('express');
+const express = require('express');
 // Set up express
-var app = express();
+const app = express();
 // Require mongostore session storage
-var mongoStore = require('connect-mongo')(express);
-var passport = require('passport');
-var config = require('./shop/config.json');
-var info = require('./package.json');
+const config = require('./shop/config.json');
+const info = require('./package.json');
+
+const session = require('express-session');
+const mongoStore = require('connect-mongo')(session);
+const passport = require('passport');
+// Require needed files
+const database = require('./shop/data');
+const favicon = require('serve-favicon');
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+const serveStatic = require('serve-static');
 // Mongoose for database
 var mongoose = require('mongoose');
 // User model and local strategy for passport
@@ -32,35 +40,33 @@ mongoose.connection.on('open', function() {
 });
 
 // Configure Express
-app.configure(function(){
-    
-    // Set up jade
-    app.set('views', __dirname + '/admin/views');
-    app.set('view engine', 'jade');
-    
-    app.use(express.favicon());
-    app.use(express.cookieParser());
-    app.use(express.bodyParser());
+app.set('views', __dirname + '/admin/views');
+app.set('view engine', 'pug');
 
-    // Set up sessions
-    app.use(express.session({
-        // Set up MongoDB session storage
-        store: new mongoStore({url:config.connection}),
-        // Set session to expire after 21 days
-        cookie: { maxAge: new Date(Date.now() + 181440000)},
-        // Get session secret from config file
-        secret: config.cookie_secret
-        }));
-    
-    // Set up passport
-    app.use(passport.initialize());
-    app.use(passport.session());
-    
-    // Define public assets
-    app.use(express.static(__dirname + '/admin/public'));
-  
-});
-    
+app.use( favicon(__dirname + '/admin/public/favicon.ico' ));
+app.use( cookieParser() );
+app.use( bodyParser.urlencoded({ extended: false }) );
+
+// Set up sessions
+app.use(session({
+    // Set up MongoDB session storage
+    store: new mongoStore({url:config.connection}),
+    resave: false,
+    saveUninitialized: true,
+    // Set session to expire after 21 days
+    cookie: { maxAge: new Date(Date.now() + 181440000)},
+    // Get session secret from config file
+    secret: config.cookie_secret
+    })
+);
+
+// Set up passport
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Define public assets
+app.use( serveStatic(__dirname + '/admin/public'));
+
 // Require router, passing passport for authenticating pages
 require('./admin/router')(app, passport);
 

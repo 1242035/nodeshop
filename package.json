@@ -1,16 +1,21 @@
 {
-    "name" : "NodeShop",
-    "version" : "0.0.6",
-    "dependencies" : {
-        "express" : "*",
-        "jade" : "*",
-        "passport" : "*",
-        "passport-local" : "*",
-        "connect-mongo" : "*",
-        "mongoose" : "*",
-        "bcrypt" : "*",
-        "underscore" : "*",
-        "request" : "*",
-        "querystring" : "*"
-    }
+  "name": "NodeShop",
+  "version": "0.0.6",
+  "dependencies": {
+    "bcrypt": "*",
+    "body-parser": "*",
+    "connect-mongo": "*",
+    "cookie-parser": "*",
+    "express": "*",
+    "express-session": "*",
+    "mongoose": "*",
+    "passport": "*",
+    "passport-local": "*",
+    "pug": "*",
+    "querystring": "*",
+    "request": "*",
+    "serve-favicon": "*",
+    "serve-static": "*",
+    "underscore": "*"
+  }
 }
